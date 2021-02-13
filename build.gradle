@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'application'
+}
+
+group = 'org.mkzaman.microservice'
+version = '1.0.0'
+sourceCompatibility = '11'
+
+applicationDefaultJvmArgs = ["-Djdk.tls.client.protocols=TLSv1.2"]
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+	implementation 'org.zalando:problem-spring-web:0.26.2'
+	compile 'org.apache.commons:commons-lang3:3.11'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
