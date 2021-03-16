@@ -19,7 +19,7 @@ public class HealthResource {
             produces = "application/json")
     public ResponseEntity<Health> getHealth() {
         log.debug("REST request to get the Health Status");
-        final Health health = new Health();
+        final var health = new Health();
         health.setStatus(HealthStatus.UP);
         return ResponseEntity.ok().body(health);
     }

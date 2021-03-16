@@ -47,7 +47,7 @@ public class CustomerResource {
         if (customer.getId() != null) {
             throw new BadRequestAlertException("A new customer cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Customer result = customerRepository.save(customer);
+        final var result = customerRepository.save(customer);
         return ResponseEntity.created(new URI("/api/customers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId()))
             .body(result);
@@ -68,7 +68,7 @@ public class CustomerResource {
         if (customer.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Customer result = customerRepository.save(customer);
+        final var result = customerRepository.save(customer);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, customer.getId()))
             .body(result);
@@ -95,7 +95,7 @@ public class CustomerResource {
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable String id) {
         log.debug("REST request to get Customer : {}", id);
-        Optional<Customer> customer = customerRepository.findById(id);
+        final var customer = customerRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(customer);
     }
 

@@ -1,16 +1,10 @@
 spring:
   application:
     name: microservice-customer
-  main:
-    allow-bean-definition-overriding: true
 
-
-  devtools:
-    restart:
-      enabled: true
   data:
     mongodb:
-      uri: mongodb+srv://mkmongouser:Secret_Password@clustermicroservice.fzatn.mongodb.net
+      uri: mongodb+srv://mkmongouser:Secret@clustermicroservice.fzatn.mongodb.net
       database: customer
 
 server:

@@ -53,7 +53,7 @@ public class CustomerOrderResource {
         }
         final Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
-            final Customer customer = customerOptional.get();
+            final var customer = customerOptional.get();
             customer.addOrder(order);
             customerRepository.save(customer);
             return ResponseEntity.ok()
@@ -79,8 +79,8 @@ public class CustomerOrderResource {
         }
         final Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
-            final Customer customer = customerOptional.get();
-            final Set<Order> orderSet = customer.getOrders().stream().map(o -> Objects.equals(o.getId(), order.getId()) ? order : o).collect(Collectors.toSet());
+            final var customer = customerOptional.get();
+            final var orderSet = customer.getOrders().stream().map(o -> Objects.equals(o.getId(), order.getId()) ? order : o).collect(Collectors.toSet());
             customer.setOrders(orderSet);
             customerRepository.save(customer);
             return ResponseEntity.ok()
@@ -102,9 +102,9 @@ public class CustomerOrderResource {
         if (StringUtils.isBlank(customerId)) {
             throw new BadRequestAlertException("No Customer", ENTITY_NAME, "noid");
         }
-        final Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        final var customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
-            final Customer customer = customerOptional.get();
+            final var customer = customerOptional.get();
             return customer.getOrders();
         } else {
             throw new BadRequestAlertException("Invalid Customer", ENTITY_NAME, "invalidcustomer");
@@ -125,10 +125,10 @@ public class CustomerOrderResource {
         if (StringUtils.isBlank(customerId)) {
             throw new BadRequestAlertException("No Customer", ENTITY_NAME, "noid");
         }
-        final Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        final var customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
-            final Customer customer = customerOptional.get();
-            final Optional<Order> orderOptional = customer.getOrders().stream().filter(order -> Objects.equals(order.getId(), orderId)).findFirst();
+            final var customer = customerOptional.get();
+            final var orderOptional = customer.getOrders().stream().filter(order -> Objects.equals(order.getId(), orderId)).findFirst();
             return ResponseUtil.wrapOrNotFound(orderOptional);
         } else {
             throw new BadRequestAlertException("Invalid Customer", ENTITY_NAME, "invalidcustomer");
@@ -150,7 +150,7 @@ public class CustomerOrderResource {
         }
         final Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isPresent()) {
-            final Customer customer = customerOptional.get();
+            final var customer = customerOptional.get();
             customer.getOrders().removeIf((order) -> Objects.equals(order.getId(), orderId));
             customerRepository.save(customer);
             return ResponseEntity.noContent().build();
