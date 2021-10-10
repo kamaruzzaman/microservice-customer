@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-customer-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-central-1:877546708265:certificate/113c4264-84bd-46e0-906f-a7b1bf1e0626
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+spec:
+  #Creating a service of type load balancer. Load balancer gets created but takes time to reflect
+  type: LoadBalancer
+  selector:
+    app: microservice-customer
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8080
