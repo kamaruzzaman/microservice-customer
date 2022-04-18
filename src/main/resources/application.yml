@@ -11,3 +11,16 @@ server:
   port: 8080
   servlet:
     context-path: /customer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, info
+
+    health:
+      show-details: always
+
+  metrics:
+    tags:
+      application: MonitoringCustomerMicroservice
