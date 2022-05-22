@@ -13,9 +13,13 @@ spec:
     metadata:
       labels:
         app: microservice-customer
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: /customer/actuator/prometheus
     spec:
       containers:
         - name: microservice-customer-container
-          image: 877546708265.dkr.ecr.eu-central-1.amazonaws.com/microservice-customer:1.0.0
+          image: 877546708265.dkr.ecr.eu-central-1.amazonaws.com/microservice-customer:1.1.0
           ports:
             - containerPort: 8080

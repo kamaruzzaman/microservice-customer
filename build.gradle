@@ -46,24 +46,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-beanstalk {
-	profile = 'default' // Profile from the .aws/credentials file
-	s3Endpoint = "s3-eu-central-1.amazonaws.com"
-	beanstalkEndpoint = "elasticbeanstalk.eu-central-1.amazonaws.com"
-
-	deployments {
-		production {
-			file = tasks.bootJar
-			application = "${project.name}"
-			environment = "${project.name}-prod"
-		}
-		upload {
-			file = tasks.bootJar
-			application = "${project.name}"
-		}
-	}
-}
-
 test {
 	useJUnitPlatform()
 }
